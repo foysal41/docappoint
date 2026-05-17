@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function Footer() {
   return (
     <div className='w-full mx-auto bg-[#F8F9FD] py-8 px-4'>
-        <div className=' max-w-7xl mx-auto flex justify-between items-center gap-4'>
+        <div className=' container mx-auto flex justify-between items-center gap-4'>
             <div>
                 <Image src={logo} alt='logo' height={80} width={150} className='object-cover' ></Image>
                 <p className='text-black/30 text-[14px]'> Book Doctor. Get Better. </p>

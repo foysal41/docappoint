@@ -21,15 +21,11 @@ export default function Header() {
 
   return (
     <>
-      <nav className="w-full  top-0 z-50 sticky transition-all duration-300">
+      <nav className="w-full  top-0 z-50 sticky transition-all duration-300 mb-[-100]">
         <div
-          className={`transition-all duration-300 ${
-            scrolled
-              ? "w-full bg-white shadow-md rounded-none"
-              : "max-w-7xl mx-auto mt-4 rounded-2xl bg-slate-100/90"
-          }`}
+          className={`transition-all duration-300   bg-white shadow-md rounded-none`}
         >
-          <div className="navbar px-5 md:px-8">
+          <div className="navbar container mx-auto px-5 md:px-8">
         
             <div className="navbar-start">
               <Link href="/">

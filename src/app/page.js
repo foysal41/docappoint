@@ -1,7 +1,12 @@
 import Image from "next/image";
+import Hero from "./components/homepage/Hero";
+import TopDoctors from "./components/homepage/TopDoctors";
 
 export default function Home() {
   return (
-   <div>Home Page</div>
+   <div>
+    <Hero></Hero>
+    <TopDoctors></TopDoctors>
+   </div>
   );
 }
