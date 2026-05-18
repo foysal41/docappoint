@@ -26,7 +26,6 @@ export default function Header() {
           className={`transition-all duration-300   bg-white shadow-md rounded-none`}
         >
           <div className="navbar container mx-auto px-5 md:px-8">
-        
             <div className="navbar-start">
               <Link href="/">
                 <Image
@@ -34,12 +33,12 @@ export default function Header() {
                   alt="Logo"
                   width={150}
                   height={80}
-                  className="object-contain"
+                  loading="eager"
+                  className="h-auto w-auto object-contain"
                 />
               </Link>
             </div>
 
-         
             <div className="hidden navbar-center  lg:flex">
               <ul className="menu menu-horizontal gap-2 px-1">
                 <li>
@@ -62,7 +61,6 @@ export default function Header() {
               </ul>
             </div>
 
-          
             <div className="navbar-end gap-3">
               {!user && (
                 <div className="hidden lg:flex items-center gap-3">
@@ -70,7 +68,8 @@ export default function Header() {
                     Login
                   </Link>
 
-                  <Link href="/register"
+                  <Link
+                    href="/register"
                     className=" bg-blue-600 text-white btn  hover:bg-blue-700 rounded-full border-none"
                   >
                     Register
@@ -105,7 +104,6 @@ export default function Header() {
         </div>
       </nav>
 
-     
       <div
         onClick={() => setIsMenuOpen(false)}
         className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 lg:hidden ${
@@ -113,13 +111,11 @@ export default function Header() {
         }`}
       />
 
-   
       <aside
         className={`fixed left-0 top-0 z-50 h-full w-72 bg-white shadow-2xl transition-transform duration-300 lg:hidden ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-     
         <div className="flex items-center justify-between border-b px-5 py-4">
           <Link href="/" onClick={() => setIsMenuOpen(false)}>
             <Image
@@ -139,7 +135,6 @@ export default function Header() {
           </button>
         </div>
 
-       
         <ul className="menu p-5 text-base">
           <li>
             <Link href="/" onClick={() => setIsMenuOpen(false)}>
@@ -160,7 +155,6 @@ export default function Header() {
           </li>
         </ul>
 
-       
         <div className="absolute bottom-6 left-0 w-full px-5">
           {!user ? (
             <div className="grid grid-cols-2 gap-3">

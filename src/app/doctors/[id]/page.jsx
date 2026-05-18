@@ -1,0 +1,132 @@
+import Image from "next/image";
+import sectionBg from "@/assets/sectionBg.png";
+import { MdStars } from "react-icons/md";
+import { SlCalender } from "react-icons/sl";
+import {
+  FaHospital,
+  FaMapMarkerAlt,
+  FaMoneyBillWave,
+  FaCheck,
+  FaCalendarAlt,
+} from "react-icons/fa";
+import Link from "next/link";
+
+const fetchSingleDoctor = async (id) => {
+  const res = await fetch(`http://localhost:8000/doctors/${id}`);
+  const data = await res.json();
+  return data || {};
+};
+
+export default async function DoctorDetails({ params }) {
+  const { id } = await params;
+  const SingleDoctor = await fetchSingleDoctor(id);
+
+  const {
+    _id,
+    name,
+    specialty,
+    image,
+    experience,
+    availability,
+    description,
+    hospital,
+    location,
+    fee,
+  } = SingleDoctor;
+
+  return (
+    <div
+      className="pt-32 px-10 bg-cover bg-no-repeat"
+      style={{ backgroundImage: `url(${sectionBg.src})` }}
+    >
+      <div className="flex flex-col md:flex-row justify-start items-center  gap-4">
+        <div>
+          <Image
+            src={image}
+            alt={name}
+            height={500}
+            width={500}
+            className="  object-cover rounded-md"
+          ></Image>
+        </div>
+
+        <div>
+          <h2 className="text-[45px] font-bold ">{name}</h2>
+          <p className="text-[#23ADBE]">{specialty}</p>
+          <div className="flex items-center mt-3 bg-[#23ADBE] gap-2 py-2 px-2 rounded-lg">
+            <MdStars />
+            <p>{experience} year of exp</p>
+          </div>
+          <p>{description}</p>
+
+          <div className="flex items-center mt-3 bg-[#23ADBE] gap-2 py-2 px-2 rounded-lg">
+            <SlCalender />
+            <p className="text-blue-500 font-bold"> Availability </p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            {availability?.map((time, index) => (
+              <div
+                key={index}
+                className="flex w-fit items-center gap-3 rounded-xl bg-blue-100 px-4 py-3 text-blue-950 shadow-sm"
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-600 text-sm">
+                  🕒
+                </span>
+
+                <span className="font-semibold">{time}</span>
+              </div>
+            ))}
+          </div>
+
+
+          <Link href={"/"} ><button className="btn btn-info "> Book an Appointment </button></Link>
+        </div>
+      </div>
+
+
+
+{/* Extra Info */}
+      <div style={{marginTop: '40px'}} className="mt-8 rounded-2xl bg-white p-6 shadow-md space-y-6">
+        {/* Hospital */}
+        <div className="flex items-center justify-between  pb-4">
+          <div className="flex items-center gap-4">
+            <div className="rounded-xl bg-blue-600 p-3 text-white">
+              <FaHospital />
+            </div>
+
+            <h4 className="font-semibold text-gray-600">Hospital</h4>
+          </div>
+
+          <h4 className="font-bold text-blue-950">{hospital}</h4>
+        </div>
+
+        {/* Location */}
+        <div className="flex items-center justify-between  pb-4">
+          <div className="flex items-center gap-4">
+            <div className="rounded-xl bg-teal-500 p-3 text-white">
+              <FaCheck />
+            </div>
+
+            <h4 className="font-semibold text-gray-600">Location</h4>
+          </div>
+
+          <h4 className="font-bold text-blue-950">{location}</h4>
+        </div>
+
+        {/* Fee */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="rounded-xl bg-indigo-500 p-3 text-white">
+              <FaMoneyBillWave />
+            </div>
+
+            <h4 className="font-semibold text-gray-600">Consultation Fee</h4>
+          </div>
+
+          <h4 className="font-bold text-blue-950">৳{fee}</h4>
+        </div>
+      </div>
+    </div>
+  );
+}
