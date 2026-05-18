@@ -62,7 +62,7 @@ const chooseData = [
 export default function whyChooseUs() {
   return (
     <div
-      className="bg-cover bg-no-repeat my-10 py-20 px-5 md:px-20 "
+      className="bg-cover bg-no-repeat  py-20 px-5 md:px-20 "
       style={{ backgroundImage: `url(${sectionBg.src})` }}
     >
       <div className="container mx-auto ">
