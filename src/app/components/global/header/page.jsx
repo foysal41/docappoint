@@ -6,18 +6,32 @@ import Link from "next/link";
 import Image from "next/image";
 import userImage from "@/assets/user.png";
 import { FiMenu, FiX } from "react-icons/fi";
+import {authClient, useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+
 
 export default function Header() {
+  const router = useRouter();
+  const {data, isPending, refetch } = useSession()
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const user = false;
+  const user = data?.user;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+
+
+  const handleLogOut = async () => {
+    await authClient.signOut();
+    await refetch();
+    router.push('/')
+  }
 
   return (
     <>
@@ -48,7 +62,7 @@ export default function Header() {
                 </li>
 
                 <li>
-                  <Link href="/all-appointment" className="font-semibold">
+                  <Link href="/doctors" className="font-semibold">
                     All Appointment
                   </Link>
                 </li>
@@ -79,15 +93,16 @@ export default function Header() {
 
               {user && (
                 <div className="hidden lg:flex items-center gap-3">
+                 <p>Welcome, {data?.user?.name}</p> 
                   <Image
-                    src={userImage}
+                    src={data?.user?.image || userImage}
                     alt="user"
                     width={40}
                     height={40}
                     className="rounded-full object-cover"
                   />
 
-                  <button className="btn bg-red-500 text-white hover:bg-red-600 rounded-full border-none">
+                  <button onClick={handleLogOut} className="btn bg-red-500 text-white hover:bg-red-600 rounded-full border-none">
                     Logout
                   </button>
                 </div>
@@ -143,7 +158,7 @@ export default function Header() {
           </li>
 
           <li>
-            <Link href="/all-appointment" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/doctors" onClick={() => setIsMenuOpen(false)}>
               All Appointment
             </Link>
           </li>
@@ -177,14 +192,14 @@ export default function Header() {
           ) : (
             <div className="flex items-center justify-between rounded-xl bg-slate-100 p-3">
               <Image
-                src={userImage}
+               src={data?.user?.image || userImage}
                 alt="user"
                 width={40}
                 height={40}
                 className="rounded-full object-cover"
               />
 
-              <button className="btn btn-sm bg-red-500 text-white hover:bg-red-600 border-none rounded-full">
+              <button onClick={handleLogOut} className="btn btn-sm bg-red-500 text-white hover:bg-red-600 border-none rounded-full">
                 Logout
               </button>
             </div>

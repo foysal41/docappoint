@@ -53,18 +53,18 @@ export default async function DoctorDetails({ params }) {
         <div>
           <h2 className="text-[45px] font-bold ">{name}</h2>
           <p className="text-[#23ADBE]">{specialty}</p>
-          <div className="flex items-center mt-3 bg-[#23ADBE] gap-2 py-2 px-2 rounded-lg">
+          <div className="flex w-[40%] items-center mt-3 bg-[#23ADBE] gap-2 py-1 px-2 rounded-lg text-white">
             <MdStars />
             <p>{experience} year of exp</p>
           </div>
-          <p>{description}</p>
+          <p className="mt-3">{description}</p>
 
-          <div className="flex items-center mt-3 bg-[#23ADBE] gap-2 py-2 px-2 rounded-lg">
+          <div className="flex w-[40%] items-center mt-3 bg-[#23ADBE] gap-2 py-1 px-2 rounded-lg text-white">
             <SlCalender />
-            <p className="text-blue-500 font-bold"> Availability </p>
+            <p className=" font-bold"> Availability </p>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 my-4">
             {availability?.map((time, index) => (
               <div
                 key={index}
