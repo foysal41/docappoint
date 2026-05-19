@@ -5,7 +5,10 @@ import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 
-export default function LoginPage() {
+export default  function LoginPage() {
+    
+
+
      const router = useRouter();
       const handleLogin = async (e) => {
         e.preventDefault();
@@ -26,6 +29,10 @@ export default function LoginPage() {
         toast.success("Login successful");
         router.refresh();
         router.push("/")
+
+        const { data: tokenData } = await authClient.token()
+        console.log(tokenData)
+
       };
 
 
