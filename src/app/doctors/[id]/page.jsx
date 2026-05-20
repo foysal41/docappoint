@@ -10,16 +10,33 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import Link from "next/link";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
-const fetchSingleDoctor = async (id) => {
-  const res = await fetch(`http://localhost:8000/doctors/${id}`);
+const fetchSingleDoctor = async (id, token) => {
+  const res = await fetch(`http://localhost:8000/doctors/${id}`, {
+    headers: {
+      authorization: token?.token ? `Bearer ${token.token}` : "",
+    },
+  });
+
   const data = await res.json();
   return data || {};
 };
 
 export default async function DoctorDetails({ params }) {
   const { id } = await params;
-  const SingleDoctor = await fetchSingleDoctor(id);
+  const token = await auth.api.getToken({
+    headers: await headers(),
+  });
+  //   const session = await auth.api.getSession({
+  //   headers: await headers()
+
+  // })
+  // console.log(token)
+  // console.log(session?.session?.token)
+
+  const SingleDoctor = await fetchSingleDoctor(id, token);
 
   const {
     _id,
@@ -43,11 +60,11 @@ export default async function DoctorDetails({ params }) {
         <div>
           <Image
             src={image}
-            alt={name}
+            alt={name || "Doctor image"}
             height={500}
             width={500}
-            className="  object-cover rounded-md"
-          ></Image>
+            className="object-cover rounded-md"
+          />
         </div>
 
         <div>
@@ -79,15 +96,17 @@ export default async function DoctorDetails({ params }) {
             ))}
           </div>
 
-
-          <Link href={"/"} ><button className="btn btn-info "> Book an Appointment </button></Link>
+          <Link href={"/"}>
+            <button className="btn btn-info "> Book an Appointment </button>
+          </Link>
         </div>
       </div>
 
-
-
-{/* Extra Info */}
-      <div style={{marginTop: '40px'}} className="mt-8 rounded-2xl bg-white p-6 shadow-md space-y-6">
+      {/* Extra Info */}
+      <div
+        style={{ marginTop: "40px" }}
+        className="mt-8 rounded-2xl bg-white p-6 shadow-md space-y-6"
+      >
         {/* Hospital */}
         <div className="flex items-center justify-between  pb-4">
           <div className="flex items-center gap-4">
