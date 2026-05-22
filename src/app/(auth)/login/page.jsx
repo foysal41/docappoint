@@ -72,10 +72,6 @@ export default  function LoginPage() {
                     <hr className="mt-6" />
 
 
-
-  <button style={{ marginTop: "20px",  width: "100%" , borderRadius: "16px", border: "1px solid #ddd",padding: "16px", outline: "none",color: "#2B7FFF",fontSize: "18px",fontWeight: "700", cursor: "pointer",  transition: "0.3s",
-  }} className="btn">Sign In with Google</button>
-
                 </form>
                   <div className="whitespace-nowrap mt-6 text-center">
                             Or Sign up with Google

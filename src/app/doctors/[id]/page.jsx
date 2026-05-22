@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+import BookingDoctor from "@/app/components/BookingDoctor";
 
 const fetchSingleDoctor = async (id, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/doctors/${id}`, {
@@ -96,9 +97,7 @@ export default async function DoctorDetails({ params }) {
             ))}
           </div>
 
-          <Link href={"/"}>
-            <button className="btn btn-info "> Book an Appointment </button>
-          </Link>
+        <BookingDoctor SingleDoctor ={SingleDoctor}></BookingDoctor>
         </div>
       </div>
 
