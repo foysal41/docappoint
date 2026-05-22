@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -155,6 +156,8 @@ export default function RegisterPage() {
           >
             <FcGoogle></FcGoogle> Sign In with Google
           </button>
+
+          <p className="text-center">You Have already account <Link className="text-blue-500" href={'/login'}>Login</Link></p>
         </div>
       </div>
     </div>
