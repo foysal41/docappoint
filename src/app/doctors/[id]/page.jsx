@@ -14,7 +14,7 @@ import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
 const fetchSingleDoctor = async (id, token) => {
-  const res = await fetch(`http://localhost:8000/doctors/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/doctors/${id}`, {
     headers: {
       authorization: token?.token ? `Bearer ${token.token}` : "",
     },

@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -16,14 +17,18 @@ export default function RegisterPage() {
       callback: "/",
     });
 
-
     if (error) {
-      
       toast.error("Register Failed");
       return;
     }
     toast.success("Register successful");
-    router.push("/")
+    router.push("/");
+  };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
 
   return (
@@ -140,24 +145,15 @@ export default function RegisterPage() {
               }}
             />
           </form>
-          <hr className="mt-6" />
+
+          <div className="whitespace-nowrap mt-6 text-center">
+            Or Sign up with Google
+          </div>
           <button
-            style={{
-              marginTop: "20px",
-              width: "100%",
-              borderRadius: "16px",
-              border: "1px solid #ddd",
-              padding: "16px",
-              outline: "none",
-              color: "#2B7FFF",
-              fontSize: "18px",
-              fontWeight: "700",
-              cursor: "pointer",
-              transition: "0.3s",
-            }}
-            className="btn"
+            onClick={handleGoogleSignIn}
+            className="flex justify-center items-center gap-2 mt-5 w-full rounded-2xl border border-[#ddd] p-4 outline-none text-[#2B7FFF] text-[18px] font-bold cursor-pointer transition-all duration-300"
           >
-            Sign In with Google
+            <FcGoogle></FcGoogle> Sign In with Google
           </button>
         </div>
       </div>

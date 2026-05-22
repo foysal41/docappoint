@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
 
 export default  function LoginPage() {
     
@@ -35,6 +36,12 @@ export default  function LoginPage() {
 
       };
 
+      
+        const handleGoogleSignIn = async () => {
+          await authClient.signIn.social({
+            provider: "google",
+          });
+        };
 
   return (
     <div className='pt-32 px-10 '>
@@ -70,7 +77,15 @@ export default  function LoginPage() {
   }} className="btn">Sign In with Google</button>
 
                 </form>
-                
+                  <div className="whitespace-nowrap mt-6 text-center">
+                            Or Sign up with Google
+                          </div>
+                          <button
+                            onClick={handleGoogleSignIn}
+                            className="flex justify-center items-center gap-2 mt-5 w-full rounded-2xl border border-[#ddd] p-4 outline-none text-[#2B7FFF] text-[18px] font-bold cursor-pointer transition-all duration-300"
+                          >
+                            <FcGoogle></FcGoogle> Sign In with Google
+                          </button>
             </div>
         </div>
     </div>
