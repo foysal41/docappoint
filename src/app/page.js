@@ -5,6 +5,13 @@ import WhyChooseUs from "./components/homepage/WhyChooseUs";
 import Testimonial from "./components/homepage/Testimonial";
 import EmergencyService from "./components/homepage/EmergencyService";
 
+
+export const metadata = {
+  title: "Home | Doc Appoint",
+  description: "Modern doctor appointment booking platform",
+};
+
+
 export default function Home() {
   return (
    <div>
