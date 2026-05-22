@@ -1,28 +1,21 @@
+import { fetchDoctors } from "@/lib/doctor/data";
 import Image from "next/image";
 import Link from "next/link";
 import { FaDollarSign, FaToolbox } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
+import SearchBar from "../components/SearchBar";
 
-const fetchDoctors = async () => {
-  const res = await fetch(`http://localhost:8000/doctors`);
-  const data = await res.json();
-  return data || [];
-};
+// const doctors = await fetchDoctors(searchTerm);
 
-export default async function DoctorArchive() {
-  const doctors = await fetchDoctors();
+export default async function DoctorArchive({searchParams}) {
+  const sParams = await searchParams;
+
+  const doctors = await fetchDoctors(sParams?.searchTerm || "");
 
   return (
     <div className="pt-32 px-10">
            
-        <input
-          type="text"
-          name="search"
-          placeholder="Search doctor by name..."
-       
-          className="border mb-5 border-gray-300 px-4 py-3 rounded-md w-full md:w-[400px] outline-none"
-        />
-
+        <SearchBar></SearchBar>
        
    
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

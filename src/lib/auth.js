@@ -4,6 +4,9 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
 import dns from "node:dns/promises";
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
+// import dns from "node:dns/promises";
+// dns.setServers(["1.1.1.1", "8.8.8.8"]);
+
 
 import { jwt } from "better-auth/plugins"
 
