@@ -16,11 +16,11 @@ const client = new MongoClient(process.env.MONGO_URI);
 const db = client.db('docappointdb');
 
 export const auth = betterAuth({
-  // database: mongodbAdapter(db),
-  database: mongodbAdapter(db, {
-    // Optional: if you don't provide a client, database transactions won't be enabled.
-    client
-  }),
+  database: mongodbAdapter(db),
+  // database: mongodbAdapter(db, {
+  //   // Optional: if you don't provide a client, database transactions won't be enabled.
+  //   client
+  // }),
 
    
 

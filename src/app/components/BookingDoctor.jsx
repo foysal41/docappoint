@@ -11,15 +11,8 @@ export default function BookingDoctor({ SingleDoctor }) {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
-  const {
-    _id,
-    name,
-    specialty,
-    hospital,
-    location,
-    fee,
-    availability,
-  } = SingleDoctor;
+  const { _id, name, specialty, hospital, location, fee, availability } =
+    SingleDoctor;
 
   if (isPending) {
     return <p>Loading...</p>;
@@ -31,13 +24,11 @@ export default function BookingDoctor({ SingleDoctor }) {
 
   const handleBooking = async (e) => {
     e.preventDefault();
-
-    console.log("Booking button clicked");
-
     const form = e.target;
 
     const bookingData = {
       doctorId: _id,
+      userId: user.id,
       doctorName: name,
       specialty,
       hospital,
@@ -48,6 +39,7 @@ export default function BookingDoctor({ SingleDoctor }) {
       patientName: form.patientName.value,
       patientEmail: form.patientEmail.value,
       patientPhone: form.patientPhone.value,
+      reason: form.reason.value,
       userEmail: user?.email,
       userName: user?.name,
     };
@@ -67,7 +59,7 @@ export default function BookingDoctor({ SingleDoctor }) {
     console.log("Booking Response:", data);
 
     if (data?.insertedId) {
-       toast.success("Booking successful");
+      toast.success("Booking successful");
       setOpenModal(false);
       form.reset();
       setSelectedTime("");
@@ -151,6 +143,13 @@ export default function BookingDoctor({ SingleDoctor }) {
                   </option>
                 ))}
               </select>
+
+              <textarea
+                name="reason"
+                placeholder="Reason for Appointment"
+                required
+                className="w-full rounded-xl border px-4 py-3 outline-none min-h-[100px]"
+              ></textarea>
 
               <button
                 type="submit"
