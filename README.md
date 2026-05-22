@@ -15,7 +15,7 @@ A modern full stack doctor appointment  booking platform where user can browse d
 * delete booking  
 
 
-# 🛠️ Tech Stack
+#  Tech Stack
 
 ## Frontend
 
@@ -34,12 +34,12 @@ A modern full stack doctor appointment  booking platform where user can browse d
 * Better Auth
 
 
-# 👨‍💻 Author
+#  Author
 
 ### Foysal Jaman
 
 
 
-# 📄 License
+# License
 
 This project is open-source and available for learning purposes.
